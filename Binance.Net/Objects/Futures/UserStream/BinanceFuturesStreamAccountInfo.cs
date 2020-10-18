@@ -1,14 +1,33 @@
+using System;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Futures.UserStream
 {
     /// <summary>
-    /// Account update event
+    /// Account update
     /// </summary>
-    public class BinanceFuturesStreamAccountUpdate
+    public class BinanceFuturesStreamAccountUpdate: BinanceStreamEvent
+    {
+        /// <summary>
+        /// The update data
+        /// </summary>
+        [JsonProperty("a")]
+        public BinanceFuturesStreamAccountUpdateData UpdateData { get; set; }
+        /// <summary>
+        /// Transaction time
+        /// </summary>
+        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
+        public DateTime TransactionTime { get; set; }
+    }
+
+    /// <summary>
+    /// Account update data
+    /// </summary>
+    public class BinanceFuturesStreamAccountUpdateData
     {
         /// <summary>
         /// Account update reason type
@@ -80,7 +99,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The Unrealized PnL
         /// </summary>
         [JsonProperty("up")]
-        public decimal UnRealizedPnL { get; set; }
+        public decimal UnrealizedPnl { get; set; }
 
         /// <summary>
         /// The margin type

@@ -113,7 +113,7 @@ client.Futures.SubscribeToBookTickerUpdates("BTCUSDT", data => {
 
 ````
 
-To subscribe to account update ( balance updates, order updates, etc ) you need to create a listen key using the `BinanceClient`, then start the user stream for account updates on the `BinanceSocketClient`:
+To subscribe to account update (balance updates, order updates, etc.) you need to create a listen key using the `BinanceClient`, then start the user stream for account updates on the `BinanceSocketClient`:
 ````csharp
 var client = new BinanceClient(new BinanceClientOptions{
 	ApiCredentials = new ApiCredentials("APIKEY", "APISECRET")
@@ -138,13 +138,25 @@ socketClient.Spot.SubscribeToUserStream(startResult.Data,
 	});
 ````
 
-Null can be passed as a parameter to any of these handlers to ignore the events of that type.
+`null` can be passed as a parameter to any of these handlers to ignore the events of that type.
 
 
 When no longer listening to private endpoints the `StopUserStream` method in `BinanceClient` should be used to signal the Binance server the stream can be closed.
 
 
 ## Release notes
+* Version 6.2.0 - 08 Oct 2020
+    * Added missing transaction timestamp on future user streams
+    * Updated book price models
+    * Update CryptoExchange.Net
+
+* Version 6.1.0 - 06 Oct 2020
+    * Fixed future trade timestamps
+    * Fixed some decimal serialization culture issues
+    * Updated future user streams to include timestamps
+    * Fixed used weight parsing
+    * Brokerage API update
+
 * Version 6.0.2 - 17 Sep 2020
     * Fix for socket client receiving intermittent byte data
     * Updated market data interfaces to support inheritance
