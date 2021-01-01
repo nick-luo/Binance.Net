@@ -3,13 +3,14 @@ using Binance.Net.Enums;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using CryptoExchange.Net.ExchangeInterfaces;
 
 namespace Binance.Net.Objects.Spot.MarketData
 {
     /// <summary>
     /// Symbol info
     /// </summary>
-    public class BinanceSymbol
+    public class BinanceSymbol: ICommonSymbol
     {
         /// <summary>
         /// The symbol
@@ -38,6 +39,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// </summary>
         [JsonProperty("quotePrecision")]
         public int QuoteAssetPrecision { get; set; }
+
         /// <summary>
         /// Allowed order types
         /// </summary>
@@ -86,46 +88,49 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// Filter for max amount of iceberg parts for this symbol
         /// </summary>
         [JsonIgnore]        
-        public BinanceSymbolIcebergPartsFilter IceBergPartsFilter => Filters.OfType<BinanceSymbolIcebergPartsFilter>().FirstOrDefault();
+        public BinanceSymbolIcebergPartsFilter? IceBergPartsFilter => Filters.OfType<BinanceSymbolIcebergPartsFilter>().FirstOrDefault();
         /// <summary>
         /// Filter for max accuracy of the quantity for this symbol
         /// </summary>
         [JsonIgnore]
-        public BinanceSymbolLotSizeFilter LotSizeFilter => Filters.OfType<BinanceSymbolLotSizeFilter>().FirstOrDefault();
+        public BinanceSymbolLotSizeFilter? LotSizeFilter => Filters.OfType<BinanceSymbolLotSizeFilter>().FirstOrDefault();
         /// <summary>
         /// Filter for max accuracy of the quantity for this symbol, specifically for market orders
         /// </summary>
         [JsonIgnore]
-        public BinanceSymbolMarketLotSizeFilter MarketLotSizeFilter => Filters.OfType<BinanceSymbolMarketLotSizeFilter>().FirstOrDefault();
+        public BinanceSymbolMarketLotSizeFilter? MarketLotSizeFilter => Filters.OfType<BinanceSymbolMarketLotSizeFilter>().FirstOrDefault();
         /// <summary>
         /// Filter for max number of orders for this symbol
         /// </summary>
         [JsonIgnore]
-        public BinanceSymbolMaxOrdersFilter MaxOrdersFilter => Filters.OfType<BinanceSymbolMaxOrdersFilter>().FirstOrDefault();
+        public BinanceSymbolMaxOrdersFilter? MaxOrdersFilter => Filters.OfType<BinanceSymbolMaxOrdersFilter>().FirstOrDefault();
         /// <summary>
         /// Filter for max algorithmic orders for this symbol
         /// </summary>
         [JsonIgnore]
-        public BinanceSymbolMaxAlgorithmicOrdersFilter MaxAlgorithmicOrdersFilter => Filters.OfType<BinanceSymbolMaxAlgorithmicOrdersFilter>().FirstOrDefault();
+        public BinanceSymbolMaxAlgorithmicOrdersFilter? MaxAlgorithmicOrdersFilter => Filters.OfType<BinanceSymbolMaxAlgorithmicOrdersFilter>().FirstOrDefault();
         /// <summary>
         /// Filter for the minimal size of an order for this symbol
         /// </summary>
         [JsonIgnore]
-        public BinanceSymbolMinNotionalFilter MinNotionalFilter => Filters.OfType<BinanceSymbolMinNotionalFilter>().FirstOrDefault();
+        public BinanceSymbolMinNotionalFilter? MinNotionalFilter => Filters.OfType<BinanceSymbolMinNotionalFilter>().FirstOrDefault();
         /// <summary>
         /// Filter for the max accuracy of the price for this symbol
         /// </summary>
         [JsonIgnore]
-        public BinanceSymbolPriceFilter PriceFilter => Filters.OfType<BinanceSymbolPriceFilter>().FirstOrDefault();
+        public BinanceSymbolPriceFilter? PriceFilter => Filters.OfType<BinanceSymbolPriceFilter>().FirstOrDefault();
         /// <summary>
         /// Filter for the maximum deviation of the price
         /// </summary>
         [JsonIgnore]
-        public BinanceSymbolPercentPriceFilter PricePercentFilter => Filters.OfType<BinanceSymbolPercentPriceFilter>().FirstOrDefault();
+        public BinanceSymbolPercentPriceFilter? PricePercentFilter => Filters.OfType<BinanceSymbolPercentPriceFilter>().FirstOrDefault();
         /// <summary>
         /// Filter for the maximum position on a symbol
         /// </summary>
         [JsonIgnore]
-        public BinanceSymbolMaxPositionFilter MaxPositionFilter => Filters.OfType<BinanceSymbolMaxPositionFilter>().FirstOrDefault();
+        public BinanceSymbolMaxPositionFilter? MaxPositionFilter => Filters.OfType<BinanceSymbolMaxPositionFilter>().FirstOrDefault();
+
+        string ICommonSymbol.CommonName => Name;
+        decimal ICommonSymbol.CommonMinimumTradeSize => LotSizeFilter?.MinQuantity ?? 0;
     }
 }

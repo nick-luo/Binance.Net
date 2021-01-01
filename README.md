@@ -61,6 +61,10 @@ Implementations from third parties:
 <br />
 <a href="https://github.com/intelligences/HitBTC.Net">HitBTC</a>
 </td>
+<td><a href="https://github.com/EricGarnier/LiveCoin.Net"><img src="https://github.com/EricGarnier/LiveCoin.Net/blob/master/LiveCoin.Net/Icon/icon.png?raw=true"></a>
+<br />
+<a href="https://github.com/EricGarnier/LiveCoin.Net">LiveCoin</a>
+</td>
 </tr>
 </table>
 
@@ -149,6 +153,19 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.5.0 - 21 dec 2020
+    * Updated Brokerage API
+    * Fix for SubAccountToSubAccount email parameter serialization
+    * Fix for GetSubAccountTransferHistoryForSubAccount using wrong Http method
+    * Fix in TradeRules check
+    * Updated CryptoExchange.Net, updated IExchangeClient
+
+* Version 6.4.1 - 11 dec 2020
+    * Updated CryptoExchange.Net
+    * Added IExchangeClient implementation
+    * Added missing properties Coin-M Symbol model
+    * Added stopPrice checking in AutoComply trade rules behaviour
+
 * Version 6.4.0 - 25 nov 2020
     * Fixed futures book ticker stream data parsing
 
