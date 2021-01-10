@@ -10,12 +10,28 @@
         /// </summary>
         Perpetual,
         /// <summary>
+        /// Current month
+        /// </summary>
+        CurrentMonth,
+        /// <summary>
         /// Current quarter
         /// </summary>
         CurrentQuarter,
         /// <summary>
         /// Next quarter
         /// </summary>
-        NextQuarter
+        NextQuarter,
+        /// <summary>
+        /// Next quarter delivering
+        /// </summary>
+        NextQuarterDelivering,
+        /// <summary>
+        /// Next month
+        /// </summary>
+        NextMonth,
+        /// <summary>
+        /// Unknown
+        /// </summary>
+        Unknown
     }
 }
