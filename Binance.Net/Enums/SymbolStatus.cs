@@ -42,8 +42,20 @@
         /// </summary>
         Close,
         /// <summary>
+        /// Pre delivering
+        /// </summary>
+        PreDelivering,
+        /// <summary>
         /// Delivering
         /// </summary>
-        Delivering
+        Delivering,
+        /// <summary>
+        /// Pre settle
+        /// </summary>
+        PreSettle,
+        /// <summary>
+        /// Settings
+        /// </summary>
+        Settling
     }
 }

@@ -468,6 +468,11 @@
             Current quarter
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.ContractType.CurrentQuarterDelivering">
+            <summary>
+            Current quarter delivering
+            </summary>
+        </member>
         <member name="F:Binance.Net.Enums.ContractType.NextQuarter">
             <summary>
             Next quarter
@@ -1513,9 +1518,24 @@
             Closed
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.PreDelivering">
+            <summary>
+            Pre delivering
+            </summary>
+        </member>
         <member name="F:Binance.Net.Enums.SymbolStatus.Delivering">
             <summary>
             Delivering
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.PreSettle">
+            <summary>
+            Pre settle
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.Settling">
+            <summary>
+            Settings
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SystemStatus">
@@ -1611,6 +1631,21 @@
         <member name="F:Binance.Net.Enums.TransferDirectionType.MarginToMain">
             <summary>
             From margin account to main account
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.UnderlyingType">
+            <summary>
+            Underlying Type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UnderlyingType.Coin">
+            <summary>
+            Coin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UnderlyingType.Index">
+            <summary>
+            Index
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.WithdrawalStatus">
@@ -10634,6 +10669,11 @@
             Direction of the margin change request
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesMultipleOrderCancelResult">
+            <summary>
+            Extension to be able to deserialize an error response as well
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesMultipleOrderPlaceResult">
             <summary>
             Extension to be able to deserialize an error response as well
@@ -11564,6 +11604,36 @@
             The symbol
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.Pair">
+            <summary>
+            Pair
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.DeliveryDate">
+            <summary>
+            Delivery Date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.ListingDate">
+            <summary>
+            Delivery Date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.TriggerProtect">
+            <summary>
+            Trigger protect
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.UnderlyingType">
+            <summary>
+            Currently Empty
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.UnderlyingSupType">
+            <summary>
+            Currently Empty
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.TimeInForce">
             <summary>
             Allowed order time in force
@@ -11609,6 +11679,11 @@
             The status of the symbol
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtSymbol.SettlePlan">
+            <summary>
+            The status of the symbol
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinSymbol">
             <summary>
             Information about a futures symbol
@@ -11627,11 +11702,6 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinSymbol.EqualQuantityPrecision">
             <summary>
             Equal quantity precision
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinSymbol.TriggerProtect">
-            <summary>
-            Trigger protect
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbolBracket">
@@ -14567,6 +14637,11 @@
             Stream order book
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.FirstUpdateId">
+            <summary>
+            The id of this update, can be synced with BinanceClient.Spot.GetOrderBook to update the order book
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.LastUpdateIdStream">
             <summary>
             Setter for last update id, need for Json.Net
@@ -14675,11 +14750,6 @@
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.LastUpdateId">
             <summary>
             The ID of the last update
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.FirstUpdateId">
-            <summary>
-            The id of this update, can be synced with BinanceClient.Spot.GetOrderBook to update the order book
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.Bids">
