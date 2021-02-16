@@ -43,7 +43,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Information about an account positions
         /// </summary>
-        public IEnumerable<BinanceFuturesAccountPosition> Positions { get; set; } = new List<BinanceFuturesAccountPosition>();
+        public IEnumerable<BinancePositionDetailsUsdt> Positions { get; set; } = new List<BinancePositionDetailsUsdt>();
 
         /// <summary>
         /// Total initial margin

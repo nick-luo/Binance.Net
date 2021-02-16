@@ -165,6 +165,22 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.8.2 - 11 feb 2021
+    * Fixed more HttpMethods
+
+* Version 6.8.1 - 11 feb 2021
+    * Fixed GetOpenOrder endpoint on futures
+    * Fixed HttpMethods in subaccount calls
+
+* Version 6.8.0 - 09 feb 2021
+    * Fixed stopPrice AutoComply trade rules behavior
+    * Fixed position models
+
+* Version 6.7.0 - 05 feb 2021
+    * Fixed Mark stream update model
+    * Added onLeverageUpdate to futures user stream subscription
+    * Updated futures position info models
+
 * Version 6.6.4 - 22 jan 2021
     * Fixed GetSubAccountsFuturesSummary http method
     * Moved FirstUpdateId in order book model
