@@ -73,9 +73,13 @@ Implementations from third parties:
 <br />
 <a href="https://github.com/burakoner/BtcTurk.Net">BtcTurk</a>
 </td>
-<td><a href="https://github.com/burakoner/Thodex.Net"><img src="https://github.com/burakoner/Thodex.Net/blob/main/Thodex.Net/Icon/icon.png?raw=true"></a>
+<td><a href="https://github.com/burakoner/Thodex.Net"><img src="https://github.com/burakoner/Thodex.Net/blob/master/Thodex.Net/Icon/icon.png?raw=true"></a>
 <br />
 <a href="https://github.com/burakoner/Thodex.Net">Thodex</a>
+</td>
+<td><a href="https://github.com/d-ugarov/Exante.Net"><img src="https://github.com/d-ugarov/Exante.Net/blob/master/Exante.Net/Icon/icon.png?raw=true"></a>
+<br />
+<a href="https://github.com/d-ugarov/Exante.Net">Exante</a>
 </td>
 </tr>
 </table>
@@ -145,7 +149,7 @@ if(!startResult.Success)
 
 var socketClient = new BinanceSocketClient();
 
-socketClient.Spot.SubscribeToUserStream(startResult.Data, 
+socketClient.Spot.SubscribeToUserDataUpdates(startResult.Data, 
 	accountUpdate => { // Handle account info update 
 	},
 	orderUpdate => { // Handle order update
@@ -165,6 +169,31 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.11.1 - 01 mrt 2021
+    * Added Nuget SymbolPackage
+
+* Version 6.11.0 - 01 mrt 2021
+    * Fixed position models
+    * Fixed reduceOnly parameter on PlaceMultipleOrder method
+    * Added transactionFeeFlag on Withdraw method
+    * Added config for deterministic build
+    * Updated CryptoExchange.Net
+
+* Version 6.10.0 - 22 feb 2021
+    * IndexPrice added to BinanceFurustMarkPrice
+    * Removed deprecated accountInfo update from userDataStream
+    * Updated spot Order models
+
+* Version 6.9.1 - 18 feb 2021
+    * Fixed inconsistent naming GetPrices
+
+* Version 6.9.0 - 18 feb 2021
+    * Updated withdraw models
+    * Brokerage API updates
+    * Updated GetPrice for coin futures
+    * Fixed Swap quantity parameter
+    * Added limit parameter to GetDividendRecords
+
 * Version 6.8.2 - 11 feb 2021
     * Fixed more HttpMethods
 

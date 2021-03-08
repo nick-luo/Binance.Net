@@ -1688,6 +1688,21 @@
             Withdrawal has been processed
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.WithdrawDepositTransferType">
+            <summary>
+            Transfer type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawDepositTransferType.Internal">
+            <summary>
+            Internal transfer
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawDepositTransferType.External">
+            <summary>
+            External transfer
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.WorkingType">
             <summary>
             Type of working
@@ -3362,24 +3377,22 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientSpot.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientSpot.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onAccountInfoMessage">*DEPRICATED; use onAccountPositionMessage instead, this update will be removed in the future* The event handler for whenever an account info update is received</param>
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco status update is received</param>
             <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientSpot.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientSpot.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onAccountInfoMessage">*DEPRICATED; use onAccountPositionMessage instead, this update will be removed in the future* The event handler for whenever an account info update is received</param>
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
             <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
@@ -3957,6 +3970,24 @@
             <param name="endTime">End time</param>
             <param name="ct">Cancellation token</param>
             <returns>Basis</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinMarket.GetPrices(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="symbol">Retrieve for a symbol</param>
+            <param name="pair">Retrieve prices for a specific pair</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinMarket.GetPricesAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="symbol">Retrieve for a symbol</param>
+            <param name="pair">Retrieve prices for a specific pair</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinOrder">
             <summary>
@@ -4601,6 +4632,36 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetPrice(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the price of a symbol
+            </summary>
+            <param name="symbol">The symbol to get the price for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Price of symbol</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetPriceAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the price of a symbol
+            </summary>
+            <param name="symbol">The symbol to get the price for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Price of symbol</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetPrices(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetPricesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtOrder">
             <summary>
             USDT-M futures order endpoints
@@ -4748,12 +4809,14 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountApiKeyAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountApiKeyAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Api Key
             </summary>
             <param name="subAccountId">Sub account id</param>
             <param name="apiKey">Api key</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 500, max 500)</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Api key result</returns>
@@ -4933,11 +4996,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer result</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetTransferHistoryUniversalAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetTransferHistoryUniversalAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Transfer History Universal
             <para>Either fromId or toId must be sent. Return fromId equal master account by default</para>
             <para>Only get the latest history of past 30 days</para>
+            <para>If showAllStatus is true, the status in response will show four types: INIT,PROCESS,SUCCESS,FAILURE</para>
             </summary>
             <param name="fromId">From id</param>
             <param name="toId">To id</param>
@@ -4946,6 +5010,7 @@
             <param name="endDate">To date</param>
             <param name="page">Page</param>
             <param name="limit">Limit (default 500, max 500)</param>
+            <param name="showAllStatus">Show all status</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
@@ -4967,7 +5032,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer result</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.TransferFuturesAsync(System.String,System.Decimal,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.TransferFuturesAsync(System.String,System.Decimal,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Sub Account Transfer (Futures)
             <para>You need to enable "internal transfer" option for the api key which requests this endpoint</para>
@@ -4980,17 +5045,19 @@
             <param name="futuresType">Futures type</param>
             <param name="fromId">From id</param>
             <param name="toId">To id</param>
+            <param name="clientTransferId">Client transfer id</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer result</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetTransferHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetTransferHistoryAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Transfer History (Spot)
             <para>If showAllStatus is true, the status in response will show four types: INIT,PROCESS,SUCCESS,FAILURE</para>
             <para>If showAllStatus is false, the status in response will show three types: INIT,PROCESS,SUCCESS</para>
             </summary>
-            <param name="subAccountId">Sub account id</param>
+            <param name="fromId">From id</param>
+            <param name="toId">To id</param>
             <param name="clientTransferId">Client transfer id</param>
             <param name="startDate">From date</param>
             <param name="endDate">To date</param>
@@ -5001,16 +5068,17 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetTransferFuturesHistoryAsync(System.String,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetTransferFuturesHistoryAsync(System.String,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Transfer History (Futures)
             </summary>
             <param name="subAccountId">Sub account id</param>
             <param name="futuresType">Futures type</param>
-            <param name="startDate">From date (default 100 days records)</param>
-            <param name="endDate">To date (default 100 days records)</param>
+            <param name="startDate">From date (default 30 days records)</param>
+            <param name="endDate">To date (default 30 days records)</param>
             <param name="page">Page (default 1)</param>
             <param name="limit">Limit (default 50, max 500)</param>
+            <param name="clientTransferId">Client transfer id</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
@@ -5113,11 +5181,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Asset info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountFuturesAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountFuturesAssetInfoAsync(Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Futures Asset info
             <para>If subAccountId is not sent, the size must be sent</para>
             </summary>
+            <param name="futuresType">Futures type</param>
             <param name="subAccountId">Sub account id</param>
             <param name="page">Page (default 1)</param>
             <param name="size">Size (default 10, max 20)</param>
@@ -5260,24 +5329,26 @@
             <param name="ct">Cancellation token</param>
             <returns>Coins info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetAssetDividendRecords(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetAssetDividendRecords(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get asset dividend records
             </summary>
             <param name="asset">Filter by asset</param>
             /// <param name="startTime">Filter by start time from</param>
             <param name="endTime">Filter by end time till</param>
+            <param name="limit">Page size</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Dividend records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetAssetDividendRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetAssetDividendRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get asset dividend records
             </summary>
             <param name="asset">Filter by asset</param>
             /// <param name="startTime">Filter by start time from</param>
             <param name="endTime">Filter by end time till</param>
+            <param name="limit">Page size</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Dividend records</returns>
@@ -5964,36 +6035,6 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
             <returns>The aggregated trades list for the symbol</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetPrice(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Gets the price of a symbol
-            </summary>
-            <param name="symbol">The symbol to get the price for</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Price of symbol</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetPriceAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Gets the price of a symbol
-            </summary>
-            <param name="symbol">The symbol to get the price for</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Price of symbol</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetAllPrices(System.Threading.CancellationToken)">
-            <summary>
-            Get a list of the prices of all symbols
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>List of prices</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetAllPricesAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get a list of the prices of all symbols
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>List of prices</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetKlines(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -6709,7 +6750,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Asset detail</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.Withdraw(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.Withdraw(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Withdraw assets from Binance to an address
             </summary>
@@ -6718,13 +6759,14 @@
             <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
             <param name="amount">The amount to withdraw</param>
             <param name="withdrawOrderId">Custom client order id</param>
+            <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
             <param name="network">The network to use</param>
             <param name="name">Description of the address</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Withdraw assets from Binance to an address
             </summary>
@@ -6732,6 +6774,7 @@
             <param name="address">The address to send the funds to</param>
             <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
             <param name="withdrawOrderId">Custom client order id</param>
+            <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
             <param name="amount">The amount to withdraw</param>
             <param name="network">The network to use</param>
             <param name="name">Description of the address</param>
@@ -7906,6 +7949,36 @@
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotMarket.GetPrice(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the price of a symbol
+            </summary>
+            <param name="symbol">The symbol to get the price for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Price of symbol</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotMarket.GetPriceAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the price of a symbol
+            </summary>
+            <param name="symbol">The symbol to get the price for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Price of symbol</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotMarket.GetPrices(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotMarket.GetPricesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder">
             <summary>
@@ -9484,6 +9557,11 @@
             Success
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferFuturesResult.ClientTransferId">
+            <summary>
+            Client Transfer Id
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferFuturesTransactions">
             <summary>
             Transfer Futures Transactions
@@ -9532,6 +9610,11 @@
         <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferFuturesTransaction.Id">
             <summary>
             Transaction Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferFuturesTransaction.ClientTransferId">
+            <summary>
+            Client Transfer Id
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferFuturesTransaction.Date">
@@ -9642,6 +9725,11 @@
         <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferTransactionUniversal.Date">
             <summary>
             Date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferTransactionUniversal.Status">
+            <summary>
+            Status
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapOperation">
@@ -11153,6 +11241,11 @@
             Max notional
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoUsdt.PositionAmount">
+            <summary>
+            Position amount
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoCoin">
             <summary>
             Coin position info
@@ -11514,6 +11607,11 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesMarkPrice.MarkPrice">
             <summary>
             The current market price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesMarkPrice.IndexPrice">
+            <summary>
+            The current index price
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesMarkPrice.FundingRate">
@@ -12894,6 +12992,116 @@
         <member name="P:Binance.Net.Objects.Shared.BinanceKlineBase.TakerBuyQuoteVolume">
             <summary>
             Taker buy quote asset volume
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Shared.BinanceOrderBase">
+            <summary>
+            Order info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.Symbol">
+            <summary>
+            The symbol the order is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.OrderId">
+            <summary>
+            The order id generated by Binance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.OrderListId">
+            <summary>
+            Id of the order list this order belongs to
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.OriginalClientOrderId">
+            <summary>
+            Original order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.ClientOrderId">
+            <summary>
+            The order id as assigned by the client
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.Price">
+            <summary>
+            The price of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.Quantity">
+            <summary>
+            The original quantity of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.QuantityFilled">
+            <summary>
+            The currently executed quantity of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.QuoteQuantityFilled">
+            <summary>
+            Cummulative amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.QuoteQuantity">
+            <summary>
+            The original quote order quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.Status">
+            <summary>
+            The status of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.TimeInForce">
+            <summary>
+            How long the order is active
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.Type">
+            <summary>
+            The type of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.Side">
+            <summary>
+            The side of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.StopPrice">
+            <summary>
+            The stop price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.IcebergQuantity">
+            <summary>
+            The iceberg quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.CreateTime">
+            <summary>
+            The time the order was submitted
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.UpdateTime">
+            <summary>
+            The time the order was last updated
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.IsWorking">
+            <summary>
+            Is working
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.QuantityRemaining">
+            <summary>
+            Quantity which is still open to be filled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.AverageFillPrice">
+            <summary>
+            The average price the order was filled
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.BinanceClientOptions">
@@ -14904,6 +15112,16 @@
             Timestamp
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceFuturesCoinPrice">
+            <summary>
+            Futures-Coin price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceFuturesCoinPrice.Pair">
+            <summary>
+            Name of the pair
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceRecentTrade">
             <summary>
             Recent trade info
@@ -16082,76 +16300,6 @@
             Information about a canceled order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.Symbol">
-            <summary>
-            The symbol the order was for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.OrderId">
-            <summary>
-            The order id as generated by Binance
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.ClientOrderId">
-            <summary>
-            The new client order id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.OriginalClientOrderId">
-            <summary>
-            The client order id the order was
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.OrderListId">
-            <summary>
-            The order list id as generated by Binance, only for OCO orders
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.QuoteQuantity">
-            <summary>
-            The original quote order quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.Price">
-            <summary>
-            The price the order was for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.Quantity">
-            <summary>
-            Original quantity of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.QuantityFilled">
-            <summary>
-            Executed quantity of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.QuoteQuantityFilled">
-            <summary>
-            Cummulative quote quantity of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.Status">
-            <summary>
-            Status of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.TimeInForce">
-            <summary>
-            Time in force of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.Type">
-            <summary>
-            Type of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder.Side">
-            <summary>
-            Side of the order
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceCancelledId">
             <summary>
             Ids of a canceled order, either OCO or normal
@@ -16262,101 +16410,6 @@
             Information regarding a specific order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.Symbol">
-            <summary>
-            The symbol the order is for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.OrderId">
-            <summary>
-            The order id generated by Binance
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.ClientOrderId">
-            <summary>
-            The order id as assigned by the client
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.OrderListId">
-            <summary>
-            The order list id as generated by Binance, only for OCO orders
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.OriginalClientOrderId">
-            <summary>
-            Original order id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.Price">
-            <summary>
-            The price of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.Quantity">
-            <summary>
-            The original quantity of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.QuantityFilled">
-            <summary>
-            The currently executed quantity of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.QuoteQuantityFilled">
-            <summary>
-            Cummulative amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.QuoteQuantity">
-            <summary>
-            The original quote order quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.Status">
-            <summary>
-            The status of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.TimeInForce">
-            <summary>
-            How long the order is active
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.Type">
-            <summary>
-            The type of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.Side">
-            <summary>
-            The side of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.StopPrice">
-            <summary>
-            The stop price
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.IcebergQuantity">
-            <summary>
-            The iceberg quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.CreateTime">
-            <summary>
-            The time the order was submitted
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.UpdateTime">
-            <summary>
-            The time the order was last updated
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.IsWorking">
-            <summary>
-            Is working
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceOrderOcoList">
             <summary>
             The result of placing a new OCO order
@@ -16432,79 +16485,9 @@
             The result of placing a new order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.Symbol">
-            <summary>
-            The symbol the order is for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.OrderId">
-            <summary>
-            The order id as assigned by Binance
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.OrderListId">
-            <summary>
-            Id of the order list this order belongs to
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.ClientOrderId">
-            <summary>
-            The order id as assigned by the client
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.CreateTime">
             <summary>
             The time the order was placed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.Price">
-            <summary>
-            The price of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.Quantity">
-            <summary>
-            The original quantity of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.QuantityFilled">
-            <summary>
-            The quantity of the order that is executed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.QuoteQuantityFilled">
-            <summary>
-            Cummulative amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.QuoteQuantity">
-            <summary>
-            The original quote order quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.Status">
-            <summary>
-            The current status of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.TimeInForce">
-            <summary>
-            For what time the order lasts
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.Type">
-            <summary>
-            The type of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.Side">
-            <summary>
-            The side of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOcoOrder.StopPrice">
-            <summary>
-            The StopPrice of the order
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceOrderTrade">
@@ -16542,89 +16525,14 @@
             The result of placing a new order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.Symbol">
-            <summary>
-            The symbol the order is for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.OrderId">
-            <summary>
-            The order id as assigned by Binance
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.OrderListId">
-            <summary>
-            Id of the order list this order belongs to
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.ClientOrderId">
-            <summary>
-            The order id as assigned by the client
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.OriginalClientOrderId">
-            <summary>
-            Original order id
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.CreateTime">
             <summary>
             The time the order was placed
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.Price">
-            <summary>
-            The price of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.Quantity">
-            <summary>
-            The original quantity of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.QuantityFilled">
-            <summary>
-            The quantity of the order that is executed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.QuoteQuantityFilled">
-            <summary>
-            Cummulative amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.QuoteQuantity">
-            <summary>
-            The original quote order quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.Status">
-            <summary>
-            The current status of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.TimeInForce">
-            <summary>
-            For what time the order lasts
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.Type">
-            <summary>
-            The type of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.Side">
-            <summary>
-            The side of the order
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.Fills">
             <summary>
             Fills for the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.StopPrice">
-            <summary>
-            Stop price for the order
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.MarginBuyBorrowAmount">
@@ -17845,6 +17753,16 @@
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDeposit.Status">
             <summary>
             The status of the deposit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDeposit.TransferType">
+            <summary>
+            The transfer type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDeposit.Confirmations">
+            <summary>
+            Confirmations
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceDividendRecord">
@@ -19646,24 +19564,22 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onAccountInfoMessage">*DEPRICATED; use onAccountPositionMessage instead, this update will be removed in the future* The event handler for whenever an account info update is received</param>
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco status update is received</param>
             <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onAccountInfoMessage">*DEPRICATED; use onAccountPositionMessage instead, this update will be removed in the future* The event handler for whenever an account info update is received</param>
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
             <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
@@ -19750,12 +19666,14 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountApiKeyAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountApiKeyAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Api Key
             </summary>
             <param name="subAccountId">Sub account id</param>
             <param name="apiKey">Api key</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 500, max 500)</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Api key result</returns>
@@ -19921,11 +19839,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Asset info</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountFuturesAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountFuturesAssetInfoAsync(Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Futures Asset info
             <para>If subAccountId is not sent, the size must be sent</para>
             </summary>
+            <param name="futuresType">Futures type</param>
             <param name="subAccountId">Sub account id</param>
             <param name="page">Page (default 1)</param>
             <param name="size">Size (default 10, max 20)</param>
@@ -19982,11 +19901,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetTransferHistoryUniversalAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetTransferHistoryUniversalAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Transfer History Universal
             <para>Either fromId or toId must be sent. Return fromId equal master account by default</para>
             <para>Only get the latest history of past 30 days</para>
+            <para>If showAllStatus is true, the status in response will show four types: INIT,PROCESS,SUCCESS,FAILURE</para>
             </summary>
             <param name="fromId">From id</param>
             <param name="toId">To id</param>
@@ -19995,6 +19915,7 @@
             <param name="endDate">To date</param>
             <param name="page">Page</param>
             <param name="limit">Limit (default 500, max 500)</param>
+            <param name="showAllStatus">Show all status</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
@@ -20016,7 +19937,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.TransferFuturesAsync(System.String,System.Decimal,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.TransferFuturesAsync(System.String,System.Decimal,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Sub Account Transfer (Futures)
             <para>You need to enable "internal transfer" option for the api key which requests this endpoint</para>
@@ -20029,17 +19950,19 @@
             <param name="futuresType">Futures type</param>
             <param name="fromId">From id</param>
             <param name="toId">To id</param>
+            <param name="clientTransferId">Client transfer id</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetTransferHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetTransferHistoryAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Transfer History (Spot)
             <para>If showAllStatus is true, the status in response will show four types: INIT,PROCESS,SUCCESS,FAILURE</para>
             <para>If showAllStatus is false, the status in response will show three types: INIT,PROCESS,SUCCESS</para>
             </summary>
-            <param name="subAccountId">Sub account id</param>
+            <param name="fromId">From id</param>
+            <param name="toId">To id</param>
             <param name="clientTransferId">Client transfer id</param>
             <param name="startDate">From date</param>
             <param name="endDate">To date</param>
@@ -20050,16 +19973,17 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetTransferFuturesHistoryAsync(System.String,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetTransferFuturesHistoryAsync(System.String,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Transfer History (Futures)
             </summary>
             <param name="subAccountId">Sub account id</param>
             <param name="futuresType">Futures type</param>
-            <param name="startDate">From date (default 100 days records)</param>
-            <param name="endDate">To date (default 100 days records)</param>
+            <param name="startDate">From date (default 30 days records)</param>
+            <param name="endDate">To date (default 30 days records)</param>
             <param name="page">Page (default 1)</param>
             <param name="limit">Limit (default 50, max 500)</param>
+            <param name="clientTransferId">Client transfer id</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
@@ -20251,24 +20175,26 @@
             <param name="ct">Cancellation token</param>
             <returns>Coins info</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetAssetDividendRecords(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetAssetDividendRecords(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get asset dividend records
             </summary>
             <param name="asset">Filter by asset</param>
-            /// <param name="startTime">Filter by start time from</param>
+            <param name="startTime">Filter by start time from</param>
             <param name="endTime">Filter by end time till</param>
+            <param name="limit">Page size</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Dividend records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetAssetDividendRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetAssetDividendRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get asset dividend records
             </summary>
             <param name="asset">Filter by asset</param>
             /// <param name="startTime">Filter by start time from</param>
             <param name="endTime">Filter by end time till</param>
+            <param name="limit">Page size</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Dividend records</returns>
@@ -21449,7 +21375,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Asset detail</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.Withdraw(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.Withdraw(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Withdraw assets from Binance to an address
             </summary>
@@ -21459,12 +21385,13 @@
             <param name="amount">The amount to withdraw</param>
             <param name="withdrawOrderId">Custom client order id</param>
             <param name="network">The network to use</param>
+            <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
             <param name="name">Description of the address</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Withdraw assets from Binance to an address
             </summary>
@@ -21473,6 +21400,7 @@
             <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
             <param name="withdrawOrderId">Custom client order id</param>
             <param name="amount">The amount to withdraw</param>
+            <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
             <param name="network">The network to use</param>
             <param name="name">Description of the address</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21908,36 +21836,6 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
             <returns>The funding rate history for the provided symbol</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetPrice(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Gets the price of a symbol
-            </summary>
-            <param name="symbol">The symbol to get the price for</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Price of symbol</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetPriceAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Gets the price of a symbol
-            </summary>
-            <param name="symbol">The symbol to get the price for</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Price of symbol</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetAllPrices(System.Threading.CancellationToken)">
-            <summary>
-            Get a list of the prices of all symbols
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>List of prices</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetAllPricesAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get a list of the prices of all symbols
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>List of prices</returns>
         </member>
         <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetTopLongShortAccountRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
@@ -22846,6 +22744,24 @@
             <param name="ct">Cancellation token</param>
             <returns>Basis</returns>
         </member>
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetPrices(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="symbol">Retrieve for a symbol</param>
+            <param name="pair">Retrieve prices for a specific pair</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetPricesAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="symbol">Retrieve for a symbol</param>
+            <param name="pair">Retrieve prices for a specific pair</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
         <member name="T:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinOrder">
             <summary>
             COIN-M futures order endpoints
@@ -23234,6 +23150,36 @@
             <param name="symbol">The symbol to get the data for</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetPrice(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the price of a symbol
+            </summary>
+            <param name="symbol">The symbol to get the price for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Price of symbol</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetPriceAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the price of a symbol
+            </summary>
+            <param name="symbol">The symbol to get the price for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Price of symbol</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetPrices(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetPricesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
         </member>
         <member name="T:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtOrder">
             <summary>
@@ -24530,14 +24476,14 @@
             <param name="ct">Cancellation token</param>
             <returns>Price of symbol</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetAllPrices(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetPrices(System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetAllPricesAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetPricesAsync(System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
             </summary>

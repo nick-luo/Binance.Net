@@ -40,7 +40,6 @@ namespace Binance.Net.SocketSubClients
         private const string symbolMiniTickerStreamEndpoint = "@miniTicker";
         private const string allSymbolMiniTickerStreamEndpoint = "!miniTicker@arr";
 
-        private const string accountUpdateEvent = "outboundAccountInfo";
         private const string executionUpdateEvent = "executionReport";
         private const string ocoOrderUpdateEvent = "listStatus";
         private const string accountPositionUpdateEvent = "outboundAccountPosition";
@@ -576,7 +575,6 @@ namespace Binance.Net.SocketSubClients
         /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onAccountInfoMessage">*DEPRICATED; use onAccountPositionMessage instead, this update will be removed in the future* The event handler for whenever an account info update is received</param>
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
         /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco status update is received</param>
         /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
@@ -584,19 +582,17 @@ namespace Binance.Net.SocketSubClients
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public CallResult<UpdateSubscription> SubscribeToUserDataUpdates(
             string listenKey,
-            Action<BinanceStreamAccountInfo>? onAccountInfoMessage,
             Action<BinanceStreamOrderUpdate>? onOrderUpdateMessage,
             Action<BinanceStreamOrderList>? onOcoOrderUpdateMessage,
             Action<BinanceStreamPositionsUpdate>? onAccountPositionMessage,
             Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate) => SubscribeToUserDataUpdatesAsync(listenKey,
-            onAccountInfoMessage, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage,
+            onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage,
             onAccountBalanceUpdate).Result;
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onAccountInfoMessage">*DEPRICATED; use onAccountPositionMessage instead, this update will be removed in the future* The event handler for whenever an account info update is received</param>
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
         /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
         /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
@@ -604,7 +600,6 @@ namespace Binance.Net.SocketSubClients
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey,
-            Action<BinanceStreamAccountInfo>? onAccountInfoMessage,
             Action<BinanceStreamOrderUpdate>? onOrderUpdateMessage,
             Action<BinanceStreamOrderList>? onOcoOrderUpdateMessage,
             Action<BinanceStreamPositionsUpdate>? onAccountPositionMessage,
@@ -621,16 +616,6 @@ namespace Binance.Net.SocketSubClients
 
                 switch (evnt)
                 {
-                    case accountUpdateEvent:
-                    {
-                        var result = _baseClient.DeserializeInternal<BinanceStreamAccountInfo>(token, false);
-                        if (result.Success)
-                            onAccountInfoMessage?.Invoke(result.Data);
-                        else
-                            _log.Write(LogVerbosity.Warning,
-                                "Couldn't deserialize data received from account stream: " + result.Error);
-                        break;
-                    }
                     case executionUpdateEvent:
                     {
                         _log.Write(LogVerbosity.Debug, data);
