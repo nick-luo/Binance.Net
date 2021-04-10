@@ -10,7 +10,7 @@ namespace Binance.Net.Objects.Spot.Mining
     /// <summary>
     /// Revenue list
     /// </summary>
-    public class BinanceRevenueList
+    public class BinanceOtherRevenueList
     {
         /// <summary>
         /// Total number of results
@@ -23,13 +23,13 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// Revenue items
         /// </summary>
-        public IEnumerable<BinanceRevenueItem> AccountProfits { get; set; } = new List<BinanceRevenueItem>();
+        public IEnumerable<BinanceOtherRevenueItem> AccountProfits { get; set; } = new List<BinanceOtherRevenueItem>();
     }
 
     /// <summary>
     /// Revenue
     /// </summary>
-    public class BinanceRevenueItem
+    public class BinanceOtherRevenueItem
     {
         /// <summary>
         /// Timestamp
@@ -47,21 +47,9 @@ namespace Binance.Net.Objects.Spot.Mining
         [JsonConverter(typeof(BinanceEarningTypeConverter))]
         public BinanceEarningType Type { get; set; }
         /// <summary>
-        /// Day hashrate
-        /// </summary>
-        public decimal DayHashRate { get; set; }
-        /// <summary>
         /// Profit amount
         /// </summary>
         public decimal ProfitAmount { get; set; }
-        /// <summary>
-        /// Hash transfer
-        /// </summary>
-        public decimal HashTransfer { get; set; }
-        /// <summary>
-        /// Transfer amount
-        /// </summary>
-        public decimal TransferAmount { get; set; }
         /// <summary>
         /// Status
         /// </summary>

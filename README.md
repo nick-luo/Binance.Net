@@ -169,6 +169,27 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.13.1 - 02 apr 2021
+    * Fixed mining endpoints
+    * Adjusted TransferSubAccountToSubAccount request
+    * Removed invalid symbol check Usdt futures GetKlines
+
+* Version 6.13.0 - 30 mrt 2021
+    * Added CancelOpenMarginOrders endpoint
+    * Added universal Transfer endpoints
+    * Added new mining endpoints
+    * Updated futures/loan endpoints to V2
+    * Added new subAccount endpoints
+    * Added margin GetInterestRateHistory endpoint
+    * Updated multiple models
+    * Fixed trade rules not applied to Oco orders
+    * Fixed mining endpoints not signed
+    * Fixed quoteQuantity parameter serialization on GetQuote liquid swap endpoint
+    * Fixed GetAssetDetails throwing exception
+
+* Version 6.12.0 - 10 mrt 2021
+    * Fixed multiple models
+
 * Version 6.11.1 - 01 mrt 2021
     * Added Nuget SymbolPackage
 
