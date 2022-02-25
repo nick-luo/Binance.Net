@@ -5,166 +5,103 @@ Binance.Net is a wrapper around the Binance API as described on [Binance](https:
 
 **If you think something is broken, something is missing or have any questions, please open an [Issue](https://github.com/JKorf/Binance.Net/issues)**
 
-## CryptoExchange.Net
-This library is build upon the CryptoExchange.Net library, make sure to check out the documentation on that for basic usage: [docs](https://github.com/JKorf/CryptoExchange.Net)
+[Documentation](https://jkorf.github.io/Binance.Net/)
 
-## Donations
+## Donate / Sponsor
 I develop and maintain this package on my own for free in my spare time. Donations are greatly appreciated. If you prefer to donate any other currency please contact me.
 
 **Btc**:  12KwZk3r2Y3JZ2uMULcjqqBvXmpDwjhhQS  
 **Eth**:  0x069176ca1a4b1d6e0b7901a6bc0dbf3bb0bf5cc2  
 **Nano**: xrb_1ocs3hbp561ef76eoctjwg85w5ugr8wgimkj8mfhoyqbx4s1pbc74zggw7gs  
 
+Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf)  
+
 ## Discord
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
-## Getting started
-Make sure you have installed the Binance.Net [Nuget](https://www.nuget.org/packages/Binance.Net/) package and add `using Binance.Net` to your usings.  You now have access to 2 clients:  
-**BinanceClient**  
-The client to interact with the Binance REST API. Getting prices:
-````C#
-var client = new BinanceClient(new BinanceClientOptions(){
- // Specify options for the client
-});
-var callResult = await client.Spot.Market.GetPricesAsync();
-// Make sure to check if the call was successful
-if(!callResult.Success)
-{
-  // Call failed, check callResult.Error for more info
-}
-else
-{
-  // Call succeeded, callResult.Data will have the resulting data
-}
-````
-
-Placing an order:
-````C#
-var client = new BinanceClient(new BinanceClientOptions(){
- // Specify options for the client
- ApiCredentials = new ApiCredentials("Key", "Secret")
-});
-var callResult = await client.Spot.Order.PlaceOrderAsync("BTCUSDT", OrderSide.Buy, OrderType.Limit, quantity: 10, price: 50, timeInForce: TimeInForce.GoodTillCancel);
-// Make sure to check if the call was successful
-if(!callResult.Success)
-{
-  // Call failed, check callResult.Error for more info
-}
-else
-{
-  // Call succeeded, callResult.Data will have the resulting data
-}
-````
-
-Since the Binance API is quite large the `BinanceClient` has been split in multiple sub clients to make it easier to find the correct endpoints:  
-`client.General`: General account endpoints  
-`client.SubAccount`: Subaccount managing endpoints  
-`client.Margin`: (Isolated) margin trading endpoints  
-`client.Spot`: Spot trading endpoints  
-`client.Lending`: Lending endpoints  
-`client.Mining`: Mining endpoints  
-`client.WithdrawDeposit`: Endpoints regarding withdrawing/depositing  
-`client.Brokerage`: Brokerage endpoints  
-`client.FuturesUsdt`: USD-M futures trading endpoints  
-`client.FuturesCoin`: Coin-M futures trading endpoints  
-`client.Blvt`: Leveraged tokens endpoints  
-`client.BSwap`: Liquidity swap endpoints  
-
-The trading Spot, Margin, USD futures and Coin futures sub client are once again separated in different categories. The categories are the same for these sub clients, for example the Spot categories:  
-`client.Spot.System`: General endpoints for Spot trading  
-`client.Spot.Market`: Endpoints for getting market data  
-`client.Spot.Order`: Endpoints for placing and requesting orders  
-`client.Spot.UserStream`: Endpoints for starting/stopping the user stream in the `BinanceSocketClient`   
-`client.Spot.Futures`: Endpoints for futures interaction
-
-**BinanceSocketClient**
-The client to interact with the Binance websocket API. Basic usage:
-````C#
-var client = new BinanceSocketClient(new BinanceSocketClientOptions()
-{
-  // Specify options for the client
-});
-var subscribeResult = client.Spot.SubscribeToAllSymbolMiniTickerUpdatesAsync(data => {
-  // Handle data when it is received
-});
-// Make sure to check if the subscritpion was successful
-if(!subscribeResult.Success)
-{
-  // Subscription failed, check callResult.Error for more info
-}
-else
-{
-  // Subscription succeeded, the handler will start receiving data when it is available
-}
-````
-
-The `BinanceSocketClient` is also separated in different sub clients:  
-`socketClient.Spot`: Subscriptions for the Spot API  
-`socketClient.FuturesUsdt`: Subscriptions for the USD-M futures API  
-`socketClient.FuturesCoin`: Subscriptions for the Coin-M futures API  
-`socketClient.Blvt`: Subscriptions for the leveraged tokens API  
-
-## User data streams
-The `BinanceSocketClient` allows you to subscribe to user data (balances, orders, etc) updates using the `SubscribeToUserDataUpdatesAsync` method. This method needs a `listenKey` parameter which can be obtained via the `BinanceClient`:
-
-````C#
-var listenKeyResult = await binanceClient.Spot.UserStream.StartUserStreamAsync();
-if(!listenKeyResult.Success)
-{
-    // Handle error
-    return;
-}
-
-var subscribeResult = await binanceSocketClient.Spot.SubscribeToUserDataUpdatesAsync(listenKeyResult.Data, null, null, null, null);
-if (!subscribeResult.Success)
-{
-    // Handle error
-    return;
-}
-````
-
-Once the connection is established like this the `binanceClient.Spot.UserStream.KeepAliveUserStreamAsync` method should be called periodically (advised is once every 30 minutes) with the listen key to ensure the connection stays alive. 
-
-## Client options
-For the basic client options see also the CryptoExchange.Net [docs](https://github.com/JKorf/CryptoExchange.Net#client-options). The here listed options are the options specific for Binance.Net.
-**BinanceClientOptions**
-| Property | Description | Default |
-| ----------- | ----------- | ---------|
-|`BaseAddressUsdtFutures`|The base address for the USD-M futures API|`https://fapi.binance.com`
-|`BaseAddressCoinFutures`|The base address for the Coin-M futures API|`https://dapi.binance.com`
-|`AutoTimestamp`|Enable or disable auto syncing the request timestamp. See the Timestamping [docs](#timestamping).|`true`
-|`AutoTimestampRecalculationInterval`|After which time the auto timestamp value should be recalculated|`TimeSpan.FromHours(3)`
-|`TimestampOffset`|A fixed offset for the timestamp|`TimeSpan.Zero`
-|`TradeRulesBehaviour`|If/How to apply trading rules. If not set to `None` the library will check order placements for errors before sending them to the server, based on the exchange rules specified in the GetExchangeInfoAysnc result|`TradeRulesBehaviour.None`
-|TradeRulesUpdateInterval|When `TradeRulesBehaviour` is not `None` this specifies how often the trade rules should be updated from the server|`TimeSpan.FromMinutes(60)`
-|`ReceiveWindow`|The default value for the `ReceiveWindow` parameter when sending requests to protected endpoints. It specifies the max time between the timestamp in the request and the Binance server time before throwing an error | `TimeSpan.FromSeconds(5)`
-
-**BinanceSocketClientOptions**  
-| Property | Description | Default |
-| ----------- | ----------- | ---------|
-|`BaseAddressUsdtFutures`|The base address for the USD-M futures API|`wss://fstream.binance.com`
-|`BaseAddressCoinFutures`|The base address for the USD-M futures API|`wss://dstream.binance.com`
-
-## Timestamping
-Requests to private endpoints on the Binance API are required to have a timestamp parameter. Binance will check to see if the received timestamp of a request is within a certain timespan vs the Binance server time. The timespan of how much the timestamp parameter is allowed to  differ can be specified using the `recvWindow` parameter on requests to private endpoints.
-
-Because not all computers have exactly the same time this mechanism can cause errors. If for example the client time is 2 minutes earlier than the server time the server will think the request was sent 2 minutes ago since (server time on receive - message timestamp = 2 minutes). This will make Binance reject the message. 
-
-To fix this the `AutoTimestamp` client options was introduced, which requests the server time and compares it to the local client time. The offset this produces will be used to offset the timestamp which is sent to the server in authenticated requests. This works 90% of the time.
-
-Another option is to sync the operating system time more often. For Windows users have reported success using the SP TimeSync tool.
-
-## FAQ
-**The user data stream stops sending updates after x time**   
-You're probably not calling the KeepAliveUserStreamAsync periodically to keep the user stream alive.
-
-**Does this library support the testnet / Binance.us / any other variant**  
-Yes, as long as the API endpoints are the same. Switch by changing the BaseAddress in the client options.
-
-**Timestamp for this request was 1000ms ahead of the server's time / Timestamp for this request is outside of the recvWindow.**  
-See Timestamping.
-
 ## Release notes
+* Version 8.0.2 - 24 Feb 2022
+    * Fixed TradeRules not being applied
+    * Updated CryptoExchange.Net
+
+* Version 8.0.1 - 21 Feb 2022
+    * Fixed ContractType being nullable
+    * Fixed OrderType filename
+
+* Version 8.0.0 - 18 Feb 2022
+	* Added Github.io page for documentation: https://jkorf.github.io/Binance.Net/
+	* Added unit tests for parsing the returned JSON for each endpoint and subscription
+	* Added AddBinance extension method on IServiceCollection for easy dependency injection
+	* Added URL reference to API endpoint documentation for each endpoint
+	* Added default rate limiter
+
+	* Refactored client structure to be consistent across exchange implementations
+	* Renamed various properties to be consistent across exchange implementations
+
+	* Cleaned up project structure
+	* Fixed various models
+
+	* Updated CryptoExchange.Net, see https://github.com/JKorf/CryptoExchange.Net#release-notes
+	* See https://jkorf.github.io/Binance.Net/MigrationGuide.html for additional notes for updating from V7 to V8
+
+* Version 7.2.5 - 08 Oct 2021
+    * Updated CryptoExchange.Net to fix some socket issues
+
+* Version 7.2.4 - 06 Oct 2021
+    * Updated CryptoExchange.Net, fixing socket issue when calling from .Net Framework
+
+* Version 7.2.3 - 05 Oct 2021
+    * Added PriceProtect support
+
+* Version 7.2.2 - 29 Sep 2021
+    * Fix for BinanceSpotOrderBook
+    * Updated CryptoExchange.Net
+
+* Version 7.2.1 - 24 Sep 2021
+    * Added GetEnabledIsolatedMarginAccountLimitAsync endpoint
+    * Added EnableIsolatedMarginAccountAsync
+    * Added Enabled property to IsolatedMarginAccount model
+    * Added RemoveLiquidityPreviewAsync endpoint
+    * Added AddLiquidityPreviewAsync endpoint
+    * Added GetBSwapPoolConfigureAsync endpoint
+
+* Version 7.2.0 - 20 Sep 2021
+    * Updated stream Topic properties to reflect symbol where possible
+    * Added DisableIsolatedMarginAccountAysnc endpoint
+    * Updated CryptoExchange.Net
+
+* Version 7.1.4 - 15 Sep 2021
+    * Updated CryptoExchange.Net
+    * Fixed missing interface CoinFutures system sub client
+
+* Version 7.1.3 - 14 Sep 2021
+    * Fixed CreateVirtualSubAccountAsync endpoint
+    * Added missing FiatWithdrawDepositStatus entry
+    * Updated testnet spot websocket url
+
+* Version 7.1.2 - 02 Sep 2021
+    * Fixed subaccount universal transfer result deserialization
+    * Fix for disposing order book closing socket even if there are other connections
+
+* Version 7.1.1 - 31 Aug 2021
+    * Added optional start/endTime parameters to GetDusLogAsync
+    * Fixed futures position deserialization
+
+* Version 7.1.0 - 30 Aug 2021
+    * Added Margin OCO endpoints
+    * Fixed TransferSubAccountAsync parameters
+    * Updated various models
+
+* Version 7.0.5 - 26 Aug 2021
+    * Updated CryptoExchange.Net, fixing reconnecting/resubscribing sockets with multiple subscriptions on a single connection
+
+* Version 7.0.4 - 24 Aug 2021
+    * Actually included fix for multiple symbols in GetExchangeInfoAsync
+
+* Version 7.0.3 - 24 Aug 2021
+    * Updated CryptoExchange.Net, improving websocket and SymbolOrderBook performance
+    * Fix for GetExchangeInfoAsync filter by multiple symbols
+
 * Version 7.0.2 - 16 Aug 2021
     * Added orderId parameter to GetUserTradesAsync
     * Added missing TransferAsync to client interface

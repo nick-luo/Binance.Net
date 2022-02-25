@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Enums
+﻿namespace Binance.Net.Enums
 {
     /// <summary>
     /// Status of a fiat payment
@@ -36,6 +32,10 @@ namespace Binance.Net.Enums
         /// <summary>
         /// Refund failed
         /// </summary>
-        RefundFailed
+        RefundFailed,
+        /// <summary>
+        /// Expired
+        /// </summary>
+        Expired
     }
 }
