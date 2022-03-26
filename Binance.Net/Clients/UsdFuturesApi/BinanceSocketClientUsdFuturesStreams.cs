@@ -31,7 +31,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
     {
         #region fields
         private readonly BinanceSocketClient _baseClient;
-        private readonly BinanceSocketClientOptions _options;
         private readonly Log _log;
 
         private const string klineStreamEndpoint = "@kline";
@@ -70,7 +69,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public BinanceSocketClientUsdFuturesStreams(Log log, BinanceSocketClient baseClient, BinanceSocketClientOptions options) :
             base(options, options.UsdFuturesStreamsOptions)
         {
-            _options = options;
             _baseClient = baseClient;
             _log = log;
         }
@@ -415,7 +413,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                             break;
                         }
                     default:
-                        _log.Write(LogLevel.Warning, $"Received unknown user data event {evnt}: " + data);
+                        _log.Write(LogLevel.Warning, $"Received unknown user data event {evnt}: " + data.Data);
                         break;
                 }
             });

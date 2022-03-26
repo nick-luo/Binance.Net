@@ -34,7 +34,7 @@ namespace Binance.Net.Clients.SpotApi
         internal BinanceExchangeInfo? ExchangeInfo;
         internal DateTime? LastExchangeInfoUpdate;
 
-        internal static TimeSyncState TimeSyncState = new TimeSyncState();
+        internal static TimeSyncState TimeSyncState = new TimeSyncState("Spot Api");
 
         private readonly Log _log;
         #endregion
@@ -266,7 +266,7 @@ namespace Binance.Net.Clients.SpotApi
             if (symbolData.MinNotionalFilter == null || quantity == null || outputPrice == null)
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
 
-            var currentQuantity = outputQuantity.HasValue ? outputQuantity.Value : quantity.Value;
+            var currentQuantity = outputQuantity ?? quantity.Value;
             var notional = currentQuantity * outputPrice.Value;
             if (notional < symbolData.MinNotionalFilter.MinNotional)
             {
@@ -288,9 +288,15 @@ namespace Binance.Net.Clients.SpotApi
 
         internal async Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
-            ArrayParametersSerialization? arraySerialization = null, int weight = 1) where T : class
+            ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
         {
-            return await _baseClient.SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRateLimit: ignoreRateLimit).ConfigureAwait(false);
+            if (!result && result.Error!.Code == -1021 && Options.SpotApiOptions.AutoTimestamp)
+            {
+                _log.Write(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
+                TimeSyncState.LastSyncTime = DateTime.MinValue;
+            }
+            return result;                    
         }
 
         #endregion

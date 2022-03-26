@@ -1,5 +1,5 @@
 # Binance.Net
-![Build status](https://travis-ci.com/JKorf/Binance.Net.svg?branch=master) ![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg)
+[![.NET](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml) ![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg)
 
 Binance.Net is a wrapper around the Binance API as described on [Binance](https://binance-docs.github.io/apidocs/spot/en/#change-log), including all features the API provides using clear and readable objects. The library support the spot, (isolated) margin and futures API's, both the REST and websocket API's.
 
@@ -20,6 +20,35 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.0.9 - 18 Mar 2022
+    * Fixed Spot MiniTicker subscription having swapped base/quote volume properties
+    * Fixed exception getting thrown when CancelOrderAsync on USD futures fails
+
+* Version 8.0.8 - 10 Mar 2022
+    * Changed MobileNumber type from long to string, fixing GetSubAccountStatusAsync deserialization when no phone number is defined
+    * Updated CryptoExchange.Net
+
+* Version 8.0.7 - 08 Mar 2022
+    * Fixed inconsistent naming in BinanceLendingAccount model
+    * Added AllowTrailingStop property on BinanceSymbol
+    * Added new symbol filter PercentagePriceBySide
+    * Updated spot GetOrderBookAsync to allow any limit under 5000
+    * Updated CryptoExchange.Net
+
+* Version 8.0.6 - 01 Mar 2022
+    * Updated CryptoExchange.Net improving the websocket reconnection robustness
+
+* Version 8.0.5 - 01 Mar 2022
+    * Updated Limit checking on Usd futures GetMarkPriceKlinesAsync
+    * Added time sync resetting when a timestamp error is received
+
+* Version 8.0.4 - 27 Feb 2022
+    * Updated CryptoExchange.Net to fix timestamping issue when request is ratelimiter
+    * Updated USD futures kline requests max limit value check
+
+* Version 8.0.3 - 25 Feb 2022
+    * Fixed missing AccountType enum value breaking the spot GetExchangeInfoAsync call
+
 * Version 8.0.2 - 24 Feb 2022
     * Fixed TradeRules not being applied
     * Updated CryptoExchange.Net
