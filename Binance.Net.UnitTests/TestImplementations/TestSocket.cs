@@ -19,6 +19,8 @@ namespace Binance.Net.UnitTests.TestImplementations
         public event Action<Exception> OnError;
 #pragma warning restore 0067
         public event Action OnOpen;
+        public event Action OnReconnecting;
+        public event Action OnReconnected;
 
         public int Id { get; }
         public bool ShouldReconnect { get; set; }
@@ -37,6 +39,10 @@ namespace Binance.Net.UnitTests.TestImplementations
         public Encoding Encoding { get; set; }
         public int? RatelimitPerSecond { get; set; }
         public double IncomingKbps => 0;
+
+        public Uri Uri => new Uri("wss://test.com/ws");
+
+        public TimeSpan KeepAliveInterval { get; set; }
 
         public Task<bool> ConnectAsync()
         {
@@ -91,6 +97,17 @@ namespace Binance.Net.UnitTests.TestImplementations
         }
 
         public void SetProxy(ApiProxy proxy)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task ProcessAsync()
+        {
+            while (Connected)
+                await Task.Delay(10);
+        }
+
+        public Task ReconnectAsync()
         {
             throw new NotImplementedException();
         }

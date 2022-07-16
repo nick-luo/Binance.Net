@@ -51,6 +51,10 @@ namespace Binance.Net.Clients.GeneralApi
             Lending = new BinanceClientGeneralApiLending(this);
             Mining = new BinanceClientGeneralApiMining(this);
             SubAccount = new BinanceClientGeneralApiSubAccount(this);
+
+            requestBodyEmptyContent = "";
+            requestBodyFormat = RequestBodyFormat.FormData;
+            arraySerialization = ArrayParametersSerialization.MultipleValues;
         }
 
         #endregion
@@ -88,7 +92,7 @@ namespace Binance.Net.Clients.GeneralApi
             => _baseClient.SpotApi.ExchangeData.GetServerTimeAsync();
 
         /// <inheritdoc />
-        protected override TimeSyncInfo GetTimeSyncInfo()
+        public override TimeSyncInfo GetTimeSyncInfo()
             => new TimeSyncInfo(_log, Options.SpotApiOptions.AutoTimestamp, Options.SpotApiOptions.TimestampRecalculationInterval, BinanceClientSpotApi.TimeSyncState);
 
         /// <inheritdoc />

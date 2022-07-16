@@ -97,6 +97,15 @@ namespace Binance.Net.Converters
                         AveragePriceMinutes = (int)obj["avgPriceMins"]
                     };
                     break;
+                case SymbolFilterType.TrailingDelta:
+                    result = new BinanceSymbolTrailingDeltaFilter
+                    {
+                        MaxTrailingAboveDelta = (int)obj["maxTrailingAboveDelta"],
+                        MaxTrailingBelowDelta = (int)obj["maxTrailingBelowDelta"],
+                        MinTrailingAboveDelta = (int)obj["minTrailingAboveDelta"],
+                        MinTrailingBelowDelta = (int)obj["minTrailingBelowDelta"],
+                    };
+                    break;
                 default:
                     Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't parse symbol filter of type: " + obj["filterType"]);
                     result = new BinanceSymbolFilter();
@@ -176,6 +185,17 @@ namespace Binance.Net.Converters
                     writer.WriteValue(pricePercentFilter.MultiplierDown);
                     writer.WritePropertyName("avgPriceMins");
                     writer.WriteValue(pricePercentFilter.AveragePriceMinutes);
+                    break;
+                case SymbolFilterType.TrailingDelta:
+                    var TrailingDelta = (BinanceSymbolTrailingDeltaFilter)filter;
+                    writer.WritePropertyName("maxTrailingAboveDelta");
+                    writer.WriteValue(TrailingDelta.MaxTrailingAboveDelta);
+                    writer.WritePropertyName("maxTrailingBelowDelta");
+                    writer.WriteValue(TrailingDelta.MaxTrailingBelowDelta);
+                    writer.WritePropertyName("minTrailingAboveDelta");
+                    writer.WriteValue(TrailingDelta.MinTrailingAboveDelta);
+                    writer.WritePropertyName("minTrailingBelowDelta");
+                    writer.WriteValue(TrailingDelta.MinTrailingBelowDelta);
                     break;
                 default:
                     Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't write symbol filter of type: " + filter.FilterType);

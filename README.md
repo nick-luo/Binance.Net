@@ -20,6 +20,60 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.1.5 - 12 Jul 2022
+    * Fixed missing AccountType enum value causing error when deserializing GetExchangeInfoAsync
+    * Fixed future deserialization failing when there's an unknown account type
+
+* Version 8.1.4 - 10 Jul 2022
+    * Added BalanceChange property in futures account update
+    * Fixed GetPositionAdlQuantileEstimationAsync deserialization when symbol parameter is used
+    * Updated CryptoExchange.Net
+
+* Version 8.1.3 - 12 Jun 2022
+    * Fixed `invalid signature` error on multiple subaccount endpoints
+    * Fixed incorrect max limit on spot GetKlinesAsync
+    * Fixed missing datetime converter on rebate UpdateTime property
+    * Updated CryptoExchange.Net
+
+* Version 8.1.2 - 24 May 2022
+    * Fixed quoteQuantity not being passed on after checking trade rules
+    * Fixed Blvt stream address and moved it to Spot
+    * Updated CryptoExchange.Net
+
+* Version 8.1.1 - 23 May 2022
+    * Fixed parameter order trailing delta in PlaceOrderAsync
+
+* Version 8.1.0 - 22 May 2022
+    * Added LeveragedTokens user limit endpoint
+    * Added Staking endpoints
+    * Added USD futures transaction history download endpoints
+    * Added USD futures algo orders endpoints
+    * Added margin order rate limit endpoint
+    * Added interest margin data endpoint
+    * Added symbol collection overloads for GetPricesAsync, GetBookPricesAsync and GetTickersAsync
+    * Added symbol parameter for subaccount transfer
+    * Added margin account types for subaccount transfer
+    * Added TrailingDelta support
+    * Added quoteQuantity minimal notional value TradeRule validation
+    * Renamed GetAllBookPricesAsync to GetBookPricesAsync
+
+* Version 8.0.13 - 08 May 2022
+    * Added TierAnnualInterestRate to BinanceFlexibleProductPosition
+    * Changed GetFlexibleProductPositionAsync asset parameter to be optional
+    * Updated CryptoExchange.Net
+
+* Version 8.0.12 - 01 May 2022
+    * Updated CryptoExchange.Net which fixed an timing related issue in the websocket reconnection logic
+    * Fixed TrailingDelta symbol filter serialization
+    * Added seconds representation to KlineInterval enum
+
+* Version 8.0.11 - 20 Apr 2022
+    * Added trailing delta symbol filter parsing
+
+* Version 8.0.10 - 14 Apr 2022
+    * Fixed request weight for order book requests
+    * Updated CryptoExchange.Net
+
 * Version 8.0.9 - 18 Mar 2022
     * Fixed Spot MiniTicker subscription having swapped base/quote volume properties
     * Fixed exception getting thrown when CancelOrderAsync on USD futures fails

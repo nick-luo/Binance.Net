@@ -137,6 +137,11 @@ namespace Binance.Net.Objects
         }
 
         /// <summary>
+        /// Address for conencting the BLVT streams
+        /// </summary>
+        public string? BlvtStreamAddress { get; set; } = BinanceApiAddresses.Default.BlvtSocketClientAddress;
+
+        /// <summary>
         /// ctor
         /// </summary>
         public BinanceSocketClientOptions() : this(Default)
@@ -151,6 +156,8 @@ namespace Binance.Net.Objects
         {
             if (baseOn == null)
                 return;
+
+            BlvtStreamAddress = baseOn.BlvtStreamAddress;
 
             _spotStreamsOptions = new ApiClientOptions(baseOn.SpotStreamsOptions, null);
             _usdFuturesStreamsOptions = new ApiClientOptions(baseOn.UsdFuturesStreamsOptions, null);
@@ -219,6 +226,11 @@ namespace Binance.Net.Objects
         /// Update interval in milliseconds, either 100 or 1000. Defaults to 1000
         /// </summary>
         public int? UpdateInterval { get; set; }
+
+        /// <summary>
+        /// After how much time we should consider the connection dropped if no data is received for this time after the initial subscriptions
+        /// </summary>
+        public TimeSpan? InitialDataTimeout { get; set; }
 
         /// <summary>
         /// The rest client to use for requesting the initial order book
