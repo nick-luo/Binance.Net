@@ -74,7 +74,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
-            => new BinanceAuthenticationProvider(credentials);
+            => new BinanceAuthenticationProvider((BinanceApiCredentials)credentials);
 
         internal Uri GetUrl(string endpoint, string api, string? version = null)
         {
@@ -234,11 +234,11 @@ namespace Binance.Net.Clients.CoinFuturesApi
             => ExchangeData.GetServerTimeAsync();
 
         /// <inheritdoc />
-        public override TimeSyncInfo GetTimeSyncInfo()
+        public override TimeSyncInfo? GetTimeSyncInfo()
             => new TimeSyncInfo(_log, Options.CoinFuturesApiOptions.AutoTimestamp, Options.CoinFuturesApiOptions.TimestampRecalculationInterval, TimeSyncState);
 
         /// <inheritdoc />
-        public override TimeSpan GetTimeOffset()
+        public override TimeSpan? GetTimeOffset()
             => TimeSyncState.TimeOffset;
 
         /// <inheritdoc />
