@@ -27,7 +27,7 @@ namespace Binance.Net.UnitTests
 
         [Test]
         public async Task ValidateSpotAccountCalls()
-        {   
+        {
             await _comparer.ProcessSubject(
                 "Spot/Account",
                 c => c.SpotApi.Account,
@@ -85,7 +85,17 @@ namespace Binance.Net.UnitTests
                 {
                     { "GetSubAccountsAsync", "subAccounts" },
                     { "GetSubAccountAssetsAsync", "balances" },
+                    { "GetUniversalTransferHistoryAsync", "result" },
+                    { "GetFuturesAssetTransferHistoryAsync", "transfers" },
                 });
+        }
+
+        [Test]
+        public async Task ValidateSpotStakingCalls()
+        {
+            await _comparer.ProcessSubject(
+                "General/Staking",
+                c => c.GeneralApi.Staking);
         }
 
         [Test]
@@ -185,7 +195,7 @@ namespace Binance.Net.UnitTests
                     { "GetTopLongShortPositionRatioAsync", new List<string> { "shortPosition", "longPosition" } },
                 },
                 parametersToSetNull: new string[] {
-                    "limit" 
+                    "limit"
                 });
         }
 
