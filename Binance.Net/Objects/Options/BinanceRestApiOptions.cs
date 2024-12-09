@@ -1,6 +1,5 @@
 ﻿using Binance.Net.Enums;
 using CryptoExchange.Net.Objects.Options;
-using System;
 
 namespace Binance.Net.Objects.Options
 {
@@ -23,13 +22,13 @@ namespace Binance.Net.Objects.Options
         /// </summary>
         public TimeSpan TradeRulesUpdateInterval { get; set; } = TimeSpan.FromMinutes(60);
 
-        internal BinanceRestApiOptions Copy()
+        internal BinanceRestApiOptions Set(BinanceRestApiOptions targetOptions)
         {
-            var result = base.Copy<BinanceRestApiOptions>();
-            result.TimestampOffset = TimestampOffset;
-            result.TradeRulesBehaviour = TradeRulesBehaviour;
-            result.TradeRulesUpdateInterval = TradeRulesUpdateInterval;
-            return result;
+            targetOptions = base.Set<BinanceRestApiOptions>(targetOptions);
+            targetOptions.TimestampOffset = TimestampOffset;
+            targetOptions.TradeRulesBehaviour = TradeRulesBehaviour;
+            targetOptions.TradeRulesUpdateInterval = TradeRulesUpdateInterval;
+            return targetOptions;
         }
     }
 }
